@@ -1,3 +1,5 @@
+<img src="https://github.com/homadb/ServerMonitoring_TGBot/blob/main/picture.jpg?raw=true" alt="Alt text">
+
 # Server Monitoring Telegram Bot
 
 SMTB is a Python script for monitoring your server and get report with telegram bot.
