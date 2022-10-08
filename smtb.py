@@ -1,7 +1,7 @@
-'''
-Author : Febi Mudiyanto
-Date : 23/01/2022
-'''
+
+# Github: https://github.com/homadb
+# Website: https://divband.com
+
 import psutil
 import subprocess
 import os
@@ -21,15 +21,15 @@ bot = telebot.TeleBot(API_KEY)
 @bot.message_handler(commands=['start','help'])
 def help(message):
     msg = '''
-Server Monitoring Bot
+SMTB Manager
 ---------
 1. Disk Usage → /disk
 2. CPU and RAM Usage → /sysinfo
 3. Uptime Server → /uptime
 4. Server Description → /server
 Help → /help
-Regards,
-Bots
+
+"github/homadb"
 ---------
     '''
     bot.send_message(message.chat.id, msg)
@@ -41,8 +41,6 @@ def check(message):
 
 
 # get system info
-
-
 
 # disk usage (/disk)
 @bot.message_handler(commands=['disk'])
@@ -71,7 +69,7 @@ def sysinfo(message):
     ramFree = int(psutil.virtual_memory().free/(1024*1024)) #GB
     ramUsagePercent = psutil.virtual_memory().percent
     msg = '''
-CPU & RAM Info
+CPU & RAM 
 ---------
 CPU Usage = {} %
 RAM
