@@ -8,16 +8,11 @@ import os
 import telebot
 from dotenv import load_dotenv
 
-# load API_KEY from .env
-# put your API_KEY in ".env" file
-# API_KEY=<token>
 load_dotenv()
 API_KEY = os.getenv("API_KEY")
 
-# make a connection to bot
 bot = telebot.TeleBot(API_KEY)
 
-# start and help command
 @bot.message_handler(commands=['start','help'])
 def help(message):
     msg = '''
@@ -34,15 +29,10 @@ Help → /help
     '''
     bot.send_message(message.chat.id, msg)
 
-# make command function to chat if command receive
 @bot.message_handler(commands=['check'])
 def check(message):
     bot.send_message(message.chat.id, "The server is alive")
 
-
-# get system info
-
-# disk usage (/disk)
 @bot.message_handler(commands=['disk'])
 def disk(message):
     diskTotal = int(psutil.disk_usage('/').total/(1024*1024*1024))
@@ -59,8 +49,6 @@ Avail = {} GB
 Usage = {} %\n'''.format(diskTotal,diskUsed,diskAvail,diskPercent)
     bot.send_message(message.chat.id,msg)
 
-
-# cpu & ram (/sysinfo)
 @bot.message_handler(commands=['sysinfo'])
 def sysinfo(message):
     cpuUsage = psutil.cpu_percent(interval=1)
@@ -79,15 +67,12 @@ Free  = {} MB
 Used = {} %\n'''.format(cpuUsage,ramTotal,ramUsage,ramFree,ramUsagePercent)
     bot.send_message(message.chat.id,msg)
 
-# uptime (/uptime)
 @bot.message_handler(commands=['uptime'])
 def uptime(message):
     upTime = subprocess.check_output(['uptime','-p']).decode('UTF-8')
     msg = upTime
     bot.send_message(message.chat.id,msg)
 
-
-# server desc (/server)
 @bot.message_handler(commands=['server'])
 def server(message):
     uname = subprocess.check_output(['uname','-rsoi']).decode('UTF-8')
@@ -101,6 +86,4 @@ Hostname = {}
 IP Addr = {}'''.format(uname,host,ipAddr)
     bot.send_message(message.chat.id,msg)
 
-
-# listen to telegram commands
 bot.polling()
